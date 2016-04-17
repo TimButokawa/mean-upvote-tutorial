@@ -1,4 +1,13 @@
 .container
     .row
-        .col-xs-12
-            |   {{ $ctrl.hello }}
+        .col-xs-12(ng-repeat="post in $ctrl.posts")
+            |   {{ post.title }} - upvotes: {{ post.upvotes }}
+    .row
+        .col-sm-12
+            form(ng-submit="$ctrl.addPost()")
+                .form-group
+                    input.form-control(
+                        type="text"
+                        ng-model="title")
+                    button.btn.btn-sml(type="submit")
+                        |   Post

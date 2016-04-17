@@ -18,8 +18,8 @@
 
         describe('A controller vm binding...', function() {
             it('Should set hello...', function() {
-                var hello = controller.hello;
-                expect(hello).toBe('Hello World');
+                var posts = controller.posts;
+                expect(posts.length).toBe(5);
             });
         });
     });
