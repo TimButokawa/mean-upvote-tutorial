@@ -1,4 +1,45 @@
-.container
+.container-fluid
+    .page-header
+        h1 Flapper News
     .row
-        .col-xs-12
-            |   {{ $ctrl.hello }}
+        .col-sm-6
+            .post(ng-repeat="post in $ctrl.posts | orderBy: '-upvotes'")
+                span.post-icon.glyphicon.glyphicon-arrow-up(ng-click="$ctrl.incrementedUpvotes(post)")
+                span.post-text
+                    span(ng-if="post.link")
+                        a(
+                            href="{{ post.link }}"
+                            target="_blank")
+                            |   {{ post.title }}
+                    span(ng-if="!post.link")
+                        |   {{ post.title }}
+                    .pull-right
+                        |   upvotes: {{ post.upvotes }}
+    .row
+        .col-sm-12
+            h3 Add a New Post!
+            form(
+                name="upvoteForm"
+                ng-submit="upvoteForm.$valid && $ctrl.submitForm(upvoteForm)"
+                novalidate)
+                .row
+                    .col-sm-6
+                        .form-group
+                            input.form-control(
+                                type="text"
+                                ng-model="$ctrl.title"
+                                ng-class="{ 'error': upvoteForm.$error.required && upvoteForm.$submitted }"
+                                placeholder="Title"
+                                required)
+                            .help-block.error(ng-if="upvoteForm.$error.required && upvoteForm.$submitted")
+                                |   This field is required!
+                        .form-group
+                            input.form-control(
+                                type="text"
+                                ng-model="$ctrl.link"
+                                placeholder="Externa Link")
+                .row
+                    .col-sm-6.text-left
+                        .form-group
+                            button.btn.btn-sml.btn-default(type="submit")
+                                |   Post
