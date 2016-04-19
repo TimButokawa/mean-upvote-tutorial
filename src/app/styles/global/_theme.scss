@@ -1,0 +1,14 @@
+// TODO:
+// $primary:
+// $secondary:
+// $tertiary:
+
+$text-primary: #4D4D4D;
+$alert-color: #E60000; // red
+
+$border-primary: $text-primary;
+
+.error {
+    color: $alert-color;
+    border-color: $alert-color;
+}
