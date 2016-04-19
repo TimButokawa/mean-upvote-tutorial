@@ -7,7 +7,9 @@
 
     function MainController() {
         var vm = this;
-        vm.addPost = addPost;
+        vm.submitForm = submitForm;
+        vm.incrementedUpvotes = incrementedUpvotes;
+
         vm.posts = [
             {
                 title: 'post 1',
@@ -31,8 +33,25 @@
             }
         ];
 
-        function addPost() {
-            vm.posts.push( { title: 'A new post!', upvotes: 0 });
+        function submitForm(form) {
+            if(form.$valid) {
+                _addPost();
+                form.$setPristine();
+            }
+        }
+
+        function _addPost() {
+            vm.posts.push({
+                title: vm.title,
+                link: vm.link,
+                upvotes: 0
+            });
+            vm.title = '';
+            vm.link = '';
+        }
+
+        function incrementedUpvotes(post) {
+            post.upvotes += 1;
         }
     }
 })();
