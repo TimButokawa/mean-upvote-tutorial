@@ -5,11 +5,11 @@
         .module('firstMean')
         .controller('MainController', MainController);
 
-    function MainController(postService) {
+    function MainController(posts) {
         var vm = this;
         vm.submitForm = submitForm;
         vm.incrementedUpvotes = incrementedUpvotes;
-        vm.posts = postService.getPosts;
+        vm.posts = posts;
 
         function submitForm(form) {
             if(form.$valid) {
@@ -22,7 +22,8 @@
             vm.posts.push({
                 title: vm.title,
                 link: vm.link,
-                upvotes: 0
+                upvotes: 0,
+                comments: []
             });
             vm.title = '';
             vm.link = '';
