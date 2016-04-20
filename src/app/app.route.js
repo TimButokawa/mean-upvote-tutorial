@@ -9,14 +9,29 @@
     function routerConfig($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('home', {
-                url: '/',
+                url: '/home',
                 templateUrl: 'app/main/main.html',
                 controller: 'MainController',
-                controllerAs: '$ctrl'
+                controllerAs: '$ctrl',
+                resolve: {
+                    posts: function(postService) {
+                        return postService.getPosts();
+                    }
+                }
+            })
+            .state('home.posts', {
+                url: '/posts/:id',
+                views: {
+                    '@': {
+                        templateUrl: 'app/posts/post.html',
+                        controller: 'PostController',
+                        controllerAs: '$ctrl'
+                    }
+                }
             })
         ;
 
-        $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/home');
     }
 
 })();

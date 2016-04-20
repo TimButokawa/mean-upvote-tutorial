@@ -7,9 +7,13 @@
 
     function postService() {
         var service = {
-            getPosts: []
+            getPosts: getPosts
         };
 
         return service;
+
+        function getPosts() {
+            return [];
+        }
     }
 })();

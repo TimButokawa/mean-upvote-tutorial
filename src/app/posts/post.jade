@@ -1,0 +1,41 @@
+.container-fluid
+    .page-header
+        h1(ng-if="$ctrl.post.link")
+            a(
+                href="{{ $ctrl.post.link }}"
+                target="_blank")
+                |   {{ $ctrl.post.title }}
+        h1(ng-if="!$ctrl.post.link")
+            |   {{ $ctrl.post.title }}
+    .row
+        .col-sm-6
+            div(ng-if="!$ctrl.post.comments.length")
+                |   No comments yet...
+            .post(ng-repeat="comment in $ctrl.post.comments | orderBy: '-upvotes'")
+                span.post-icon.glyphicon.glyphicon-arrow-up(ng-click="$ctrl.incrementedUpvotes(comment)")
+                span
+                    |   {{ comment.upvotes }} by {{ comment.author }}
+                div
+                    |   {{ comment.body }}
+    .row
+        .col-sm-12
+            h3 Comment!
+            form(
+                name="commentForm"
+                ng-submit="commentForm.$valid && $ctrl.submitForm(commentForm)"
+                novalidate)
+                .row
+                    .col-sm-6
+                        .form-group
+                            textarea.form-control(
+                                type="text"
+                                ng-model="$ctrl.body"
+                                ng-class="{ 'error': commentForm.$error.required && commentForm.$submitted }"
+                                required)
+                            .help-block.error(ng-if="commentForm.$error.required && commentForm.$submitted")
+                                |   This field is required!
+                .row
+                    .col-sm-6.text-left
+                        .form-group
+                            button.btn.btn-sml.btn-default(type="submit")
+                                |   Add Comment

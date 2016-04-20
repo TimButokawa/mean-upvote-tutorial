@@ -5,6 +5,7 @@
         .col-sm-6
             .post(ng-repeat="post in $ctrl.posts | orderBy: '-upvotes'")
                 span.post-icon.glyphicon.glyphicon-arrow-up(ng-click="$ctrl.incrementedUpvotes(post)")
+                span {{ post.upvotes }}
                 span.post-text
                     span(ng-if="post.link")
                         a(
@@ -14,7 +15,8 @@
                     span(ng-if="!post.link")
                         |   {{ post.title }}
                     .pull-right
-                        |   upvotes: {{ post.upvotes }}
+                        a(ui-sref="home.posts({ id: $index })")
+                            |   comments
     .row
         .col-sm-12
             h3 Add a New Post!
@@ -37,7 +39,7 @@
                             input.form-control(
                                 type="text"
                                 ng-model="$ctrl.link"
-                                placeholder="Externa Link")
+                                placeholder="External Link")
                 .row
                     .col-sm-6.text-left
                         .form-group
