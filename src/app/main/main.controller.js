@@ -5,33 +5,11 @@
         .module('firstMean')
         .controller('MainController', MainController);
 
-    function MainController() {
+    function MainController(postService) {
         var vm = this;
         vm.submitForm = submitForm;
         vm.incrementedUpvotes = incrementedUpvotes;
-
-        vm.posts = [
-            {
-                title: 'post 1',
-                upvotes: 1
-            },
-            {
-                title: 'post 2',
-                upvotes: 4
-            },
-            {
-                title: 'post 3',
-                upvotes: 5
-            },
-            {
-                title: 'post 4',
-                upvotes: 13
-            },
-            {
-                title: 'post 5',
-                upvotes: 10
-            }
-        ];
+        vm.posts = postService.getPosts;
 
         function submitForm(form) {
             if(form.$valid) {
