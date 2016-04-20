@@ -19,7 +19,7 @@
         describe('A controller vm binding...', function() {
             it('Should set hello...', function() {
                 var posts = controller.posts;
-                expect(posts.length).toBe(5);
+                expect(posts).toBeDefined();
             });
         });
     });
