@@ -8,9 +8,16 @@
     function PostController($stateParams,
                             posts) {
         var vm = this;
-        vm.post = posts[$stateParams.id];
         vm.submitForm = submitForm;
         vm.incrementedUpvotes = incrementedUpvotes;
+
+        activate();
+
+        function activate() {
+            vm.post = _.find(posts, function(post) {
+                return post._id === $stateParams.id;
+            });
+        }
 
         function submitForm(form) {
             if(form.$valid) {

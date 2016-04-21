@@ -15,7 +15,7 @@
                     span(ng-if="!post.link")
                         |   {{ post.title }}
                     .pull-right
-                        a(ui-sref="home.posts({ id: $index })")
+                        a(ui-sref="home.posts({ id: post._id })")
                             |   comments
     .row
         .col-sm-12

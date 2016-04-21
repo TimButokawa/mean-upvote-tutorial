@@ -6,7 +6,11 @@
         .config(config);
 
     /** @ngInject */
-    function config($logProvider, toastrConfig) {
+    function config($logProvider,
+                    toastrConfig,
+                    RestangularProvider) {
+        // TODO: set to api
+        RestangularProvider.setBaseUrl('/');
         // Enable log
         $logProvider.debugEnabled(true);
 
